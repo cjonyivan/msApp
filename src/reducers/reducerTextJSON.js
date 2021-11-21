@@ -1,8 +1,9 @@
 
-import {ACTION_UPDATE_TEXT_JSON} from '../actions/textJsonActions';
+import { ACTION_UPDATE_TEXT_JSON, ACTION_UPDATE_TEXT_JSON_VALID } from '../actions/textJsonActions';
 
 const initialProps = {
-    text: null
+    text: null,
+    text_valid: null
 }
 
 const reducerTextJSON = (state = initialProps, action) => {
@@ -11,6 +12,12 @@ const reducerTextJSON = (state = initialProps, action) => {
             return {
                 ...state,
                 text: action.payload
+            }
+            
+        case ACTION_UPDATE_TEXT_JSON_VALID:
+            return {
+                ...state,
+                text_valid: action.payload
             }
         default:
             return initialProps

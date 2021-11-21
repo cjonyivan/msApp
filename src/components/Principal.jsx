@@ -1,16 +1,20 @@
 import { Component } from "react";
 import InputTreeSource from "./InputTreeSource";
 import { connect } from "react-redux";
-import { updateText } from "../actions/textJsonActions";
-import JsonAreaEditor from './JsonAreaEditor';
+import { updateText, updateTextValid } from "../actions/textJsonActions";
+import JsonAreaEditor from "./JsonAreaEditor";
+import OutputArea from "./OutputArea";
 
 // const entry = ["a", ["b"], ["c"]];
 
 class Principal extends Component {
-  componentDidMount = () => {};
-
   render() {
-    const { updateText = () => {}, text } = this.props;
+    const {
+      updateText = () => {},
+      updateTextValid = () => {},
+      text,
+      text_valid
+    } = this.props;
     return (
       <div className="container py-3">
         <header>
@@ -20,8 +24,11 @@ class Principal extends Component {
             </h1>
           </div>
         </header>
-        <InputTreeSource updateText={updateText}/>
-        <JsonAreaEditor text={text}/>
+        <InputTreeSource updateText={updateText} />
+        {text ? (
+          <JsonAreaEditor text={text} updateTextValid={updateTextValid} />
+        ) : null}
+        {text_valid ? <OutputArea text={text_valid}/> : null}
       </div>
     );
   }
@@ -29,11 +36,12 @@ class Principal extends Component {
 
 const mapDispatchToProps = {
   updateText,
+  updateTextValid,
 };
 
-const mapStateToProps = state => {
-  const  {source: {text =  null} = {}} = state;
-  return {text};
-}
+const mapStateToProps = (state) => {
+  const { source: { text = null, text_valid = null } = {} } = state;
+  return { text, text_valid };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Principal);

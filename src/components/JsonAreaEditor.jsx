@@ -1,20 +1,42 @@
 import { Component } from "react";
-import { parser } from "../Utils";
 import JSONInput from "react-json-editor-ajrm";
+import locale from "react-json-editor-ajrm/locale/en";
 
 class JsonAreaEditor extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount = () => {
+    const { text = null } = this.props;
+    this.updateJSONValid(text);
+  };
 
-    this.state = {
-      text: this.props.text,
-    };
-  }
+  onChange = (params) => {
+    const { error, jsObject } = params;
+    if (!error) {
+      this.updateJSONValid(jsObject);
+    }
+  };
+
+  updateJSONValid = (text) => {
+    const { updateTextValid = () => {} } = this.props;
+    updateTextValid(text);
+  };
 
   render() {
     const { text = null } = this.props;
-    const data = text && parser(text);
-    return <JSONInput id="a_unique_id" placeholder={data} width="100%" height="100%"/>;
+    return text ? (
+      <>
+        <div className="alert alert-light px-0" role="alert">
+          <span className="badge bg-primary">Tree text</span>
+        </div>
+        <JSONInput
+          id="a_unique_id"
+          placeholder={text}
+          width="100%"
+          height="100%"
+          locale={locale}
+          onChange={this.onChange}
+        />
+      </>
+    ) : null;
   }
 }
 
