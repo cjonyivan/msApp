@@ -33,8 +33,18 @@ const start = (data, index = 0, stop, result) => {
 }
 
 
+const isJson =(str)=>{
+    try {
+      return JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+  }
+
+
 
 
 export {
-    parser
+    parser,
+    isJson
 }

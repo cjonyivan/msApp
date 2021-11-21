@@ -3,5 +3,5 @@ import reducerTextJSON  from './reducerTextJSON';
 
 
 export default combineReducers({
-    reducerTextJSON
+    source: reducerTextJSON
 });

@@ -2,6 +2,7 @@ import { Component } from "react";
 import InputTreeSource from "./InputTreeSource";
 import { connect } from "react-redux";
 import { updateText } from "../actions/textJsonActions";
+import JsonAreaEditor from './JsonAreaEditor';
 
 // const entry = ["a", ["b"], ["c"]];
 
@@ -9,7 +10,7 @@ class Principal extends Component {
   componentDidMount = () => {};
 
   render() {
-    const { updateText = () => {} } = this.props;
+    const { updateText = () => {}, text } = this.props;
     return (
       <div className="container py-3">
         <header>
@@ -19,7 +20,8 @@ class Principal extends Component {
             </h1>
           </div>
         </header>
-        <InputTreeSource updateText={updateText}></InputTreeSource>
+        <InputTreeSource updateText={updateText}/>
+        <JsonAreaEditor text={text}/>
       </div>
     );
   }
@@ -29,4 +31,9 @@ const mapDispatchToProps = {
   updateText,
 };
 
-export default connect(null, mapDispatchToProps)(Principal);
+const mapStateToProps = state => {
+  const  {source: {text =  null} = {}} = state;
+  return {text};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Principal);
