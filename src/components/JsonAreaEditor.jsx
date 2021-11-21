@@ -3,10 +3,6 @@ import JSONInput from "react-json-editor-ajrm";
 import locale from "react-json-editor-ajrm/locale/en";
 
 class JsonAreaEditor extends Component {
-  componentDidMount = () => {
-    const { text = null } = this.props;
-    this.updateJSONValid(text);
-  };
 
   onChange = (params) => {
     const { error, jsObject } = params;

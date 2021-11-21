@@ -24,7 +24,7 @@ class Principal extends Component {
             </h1>
           </div>
         </header>
-        <InputTreeSource updateText={updateText} />
+        <InputTreeSource updateText={updateText} updateTextValid={updateTextValid}/>
         {text ? (
           <JsonAreaEditor text={text} updateTextValid={updateTextValid} />
         ) : null}

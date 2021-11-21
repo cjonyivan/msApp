@@ -1,5 +1,5 @@
 import { isJson, parser } from "../Utils";
-const InputTreeSource = ({ updateText = {} }) => {
+const InputTreeSource = ({ updateText = {}, updateTextValid = () =>{} }) => {
   let fileReader = null;
 
   const handleFileRead = (e) => {
@@ -8,6 +8,7 @@ const InputTreeSource = ({ updateText = {} }) => {
       if (jsonValid) {
         const parse = parser(jsonValid);
         updateText(parse);
+        updateTextValid(parse);
       }else{
         alert('No es valido =P');
       }
