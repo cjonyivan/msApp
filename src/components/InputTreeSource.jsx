@@ -4,19 +4,23 @@ const InputTreeSource = ({ updateText = {}, updateTextValid = () =>{} }) => {
 
   const handleFileRead = (e) => {
     if (fileReader && fileReader.result) {
+      // if it's a valid json
       const jsonValid = isJson(fileReader.result);
       if (jsonValid) {
+        // Transforms from array to object
         const parse = parser(jsonValid);
+        // set in the store
         updateText(parse);
         updateTextValid(parse);
       }else{
-        alert('No es valido =P');
+        alert('error');
       }
     }
   };
 
   const handleFileChosen = (file) => {
     fileReader = new FileReader();
+    // evento lo read the file content
     fileReader.onloadend = handleFileRead;
     fileReader.readAsText(file);
   };

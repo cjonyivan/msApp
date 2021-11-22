@@ -7,11 +7,13 @@ class JsonAreaEditor extends Component {
   onChange = (params) => {
     const { error, jsObject } = params;
     if (!error) {
+        //if there's a change in the edito
       this.updateJSONValid(jsObject);
     }
   };
 
   updateJSONValid = (text) => {
+    // update the store with dispatch
     const { updateTextValid = () => {} } = this.props;
     updateTextValid(text);
   };

@@ -8,7 +8,10 @@ const WrapperRectangle = ({ data }) => {
   );
 };
 
+// recursive iteration of the object
 const createDivs = (data = null, parent = null, typeSibling = null) => {
+
+
   const padding = '4px';
   const existRight = data && data.hasOwnProperty("right");
   const existLeft = data && data.hasOwnProperty("left");

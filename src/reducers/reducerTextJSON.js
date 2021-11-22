@@ -8,12 +8,13 @@ const initialProps = {
 
 const reducerTextJSON = (state = initialProps, action) => {
     switch (action.type) {
+        // action to set text original
         case ACTION_UPDATE_TEXT_JSON:
             return {
                 ...state,
                 text: action.payload
             }
-            
+        // action to set text to paint    
         case ACTION_UPDATE_TEXT_JSON_VALID:
             return {
                 ...state,
